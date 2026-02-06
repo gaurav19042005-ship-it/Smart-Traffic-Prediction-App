@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# =========================
-# PAGE CONFIG
-# =========================
 st.set_page_config(
     page_title="Smart Traffic Management with Emission Reduction",
     layout="wide"
@@ -13,9 +10,6 @@ st.set_page_config(
 st.title("🚦 Smart Traffic Management System with Emission Reduction")
 st.markdown("---")
 
-# =========================
-# LOAD DATASET DIRECTLY
-# =========================
 DATA_FILE = "traffic_emission_merge.csv"
 
 try:
@@ -24,9 +18,6 @@ except FileNotFoundError:
     st.error("❌ traffic_emission_merge.csv not found in project folder")
     st.stop()
 
-# =========================
-# BASIC VALIDATION
-# =========================
 required_cols = ["traffic_volume", "hour"]
 missing = [c for c in required_cols if c not in traffic_emission.columns]
 
@@ -34,14 +25,8 @@ if missing:
     st.error(f"❌ Missing required columns: {missing}")
     st.stop()
 
-# =========================
-# LAYOUT
-# =========================
 left_col, right_col = st.columns(2)
 
-# =====================================================
-# LEFT COLUMN → TRAFFIC ESTIMATION
-# =====================================================
 with left_col:
     st.subheader("🚦 Smart Traffic Management")
 
@@ -75,9 +60,6 @@ with left_col:
 
     st.scatter_chart(avp_df)
 
-# =====================================================
-# RIGHT COLUMN → EMISSION REDUCTION
-# =====================================================
 with right_col:
     st.subheader("🌱 Emission Reduction")
 
@@ -126,8 +108,5 @@ with right_col:
 
     st.line_chart(hourly_co2)
 
-# =========================
-# FOOTER
-# =========================
 st.markdown("---")
 st.caption("Smart Traffic Management System with Emission Reduction")
